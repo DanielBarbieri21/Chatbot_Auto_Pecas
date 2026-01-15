@@ -1,5 +1,24 @@
-# Ignorar a pasta node_modules
+# Dependências
 node_modules/
 
-# Ignorar o arquivo .env
+# Variáveis de ambiente (NÃO COMMITAR!)
 .env
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Sistema Operacional
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Arquivos temporários
+*.tmp
+*.temp

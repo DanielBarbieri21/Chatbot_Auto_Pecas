@@ -3,18 +3,219 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Chatbot da Só importados Auto Peças</title>
+  <title>AutoPeças Profissional - Sua Melhor Escolha em Auto Peças</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <div class="chat-container">
-    <h1>Chatbot da Só importados Auto Peças </h1>
-    <div id="chat-box" class="chat-box"></div>
-    <div class="input-container">
-      <input type="text" id="user-input" placeholder="Digite sua pergunta...">
-      <button onclick="sendMessage()">Enviar</button>
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="container">
+      <div class="logo">
+        <span class="logo-icon">🚗</span>
+        <h1>AutoPeças Profissional</h1>
+      </div>
+      <ul class="nav-links">
+        <li><a href="#home">Início</a></li>
+        <li><a href="#produtos">Catálogo</a></li>
+        <li><a href="#sobre">Sobre</a></li>
+        <li><a href="#contato">Contato</a></li>
+      </ul>
+      <div class="cart-icon">
+        🛒 <span id="cart-count" class="cart-count">0</span>
+      </div>
     </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section id="home" class="hero">
+    <div class="hero-content">
+      <h2>Bem-vindo à AutoPeças Profissional</h2>
+      <p>As melhores peças automotivas com qualidade garantida</p>
+      <button class="cta-button" onclick="document.getElementById('produtos').scrollIntoView({behavior: 'smooth'})">
+        Ver Catálogo
+      </button>
+    </div>
+  </section>
+
+  <div class="main-container">
+    <!-- Produtos Section -->
+    <section id="produtos" class="produtos-section">
+      <div class="container">
+        <h2>Nosso Catálogo</h2>
+        <div class="filtros">
+          <input type="text" id="search-input" placeholder="Buscar produto..." class="search-input">
+          <select id="category-filter" class="filter-select">
+            <option value="">Todas as Categorias</option>
+            <option value="Filtros">Filtros</option>
+            <option value="Óleos">Óleos</option>
+            <option value="Freios">Freios</option>
+            <option value="Correntes">Correntes</option>
+            <option value="Baterias">Baterias</option>
+            <option value="Pneus">Pneus</option>
+            <option value="Suspensão">Suspensão</option>
+            <option value="Ignição">Ignição</option>
+            <option value="Correias">Correias</option>
+          </select>
+        </div>
+        <div id="produtos-grid" class="produtos-grid">
+          <!-- Produtos carregados via JavaScript -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Chat Section -->
+    <section id="chat-section" class="chat-section">
+      <div class="container">
+        <div class="chat-wrapper">
+          <!-- Sidebar Info -->
+          <div class="chat-info">
+            <h3>💬 Assistente de Vendas</h3>
+            <p>Converse com nosso assistente IA sobre produtos, preços e disponibilidade.</p>
+            <div class="info-box">
+              <h4>Benefícios do Chatbot:</h4>
+              <ul>
+                <li>✓ Resposta em tempo real</li>
+                <li>✓ Disponível 24/7</li>
+                <li>✓ Recomendações personalizadas</li>
+                <li>✓ Informações precisas de produtos</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Chat Container -->
+          <div class="chat-container">
+            <div class="chat-header">
+              <h3>AutoPeças IA Assistant</h3>
+              <span class="status-indicator">● Online</span>
+            </div>
+            <div id="chat-box" class="chat-box">
+              <div class="message bot-message">
+                Olá! Bem-vindo à AutoPeças Profissional. Como posso ajudá-lo hoje? 
+                Estou aqui para responder suas dúvidas sobre produtos, preços e disponibilidade.
+              </div>
+            </div>
+            <div class="chat-input-container">
+              <input 
+                type="text" 
+                id="user-input" 
+                placeholder="Digite sua pergunta..."
+                class="chat-input"
+              >
+              <button id="send-btn" class="send-button" onclick="sendMessage()">Enviar</button>
+            </div>
+            <button id="reset-btn" class="reset-button" onclick="resetChat()">Limpar Conversa</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Carrinho Modal -->
+    <div id="cart-modal" class="modal">
+      <div class="modal-content">
+        <span class="close" onclick="closeCart()">&times;</span>
+        <h2>Seu Carrinho</h2>
+        <div id="cart-items" class="cart-items">
+          <!-- Itens do carrinho aparecem aqui -->
+        </div>
+        <div class="cart-total">
+          <strong>Total: R$ <span id="cart-total">0.00</span></strong>
+        </div>
+        <button class="checkout-button" onclick="checkout()">Finalizar Compra</button>
+      </div>
+    </div>
+
+    <!-- Sobre Section -->
+    <section id="sobre" class="sobre-section">
+      <div class="container">
+        <h2>Sobre Nós</h2>
+        <div class="about-content">
+          <div class="about-text">
+            <h3>AutoPeças Profissional - Excelência em Auto Peças</h3>
+            <p>
+              Somos uma empresa especializada em fornecer as melhores peças automotivas com qualidade 
+              garantida. Desde 2010, servimos profissionais e entusiastas de carros em todo o país.
+            </p>
+            <p>
+              Nosso compromisso é oferecer produtos de alta qualidade, preços competitivos e atendimento 
+              excepcional. Contamos com um catálogo completo de peças originais e certificadas.
+            </p>
+            <h4>Por que escolher a gente?</h4>
+            <ul>
+              <li>✓ Produtos certificados e originais</li>
+              <li>✓ Preços competitivos</li>
+              <li>✓ Entrega rápida</li>
+              <li>✓ Suporte técnico especializado</li>
+              <li>✓ Garantia em todos os produtos</li>
+            </ul>
+          </div>
+          <div class="about-stats">
+            <div class="stat-box">
+              <h3>10,000+</h3>
+              <p>Clientes Satisfeitos</p>
+            </div>
+            <div class="stat-box">
+              <h3>500+</h3>
+              <p>Produtos</p>
+            </div>
+            <div class="stat-box">
+              <h3>24/7</h3>
+              <p>Atendimento IA</p>
+            </div>
+            <div class="stat-box">
+              <h3>14 anos</h3>
+              <p>Experiência</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contato Section -->
+    <section id="contato" class="contato-section">
+      <div class="container">
+        <h2>Entre em Contato</h2>
+        <div class="contato-content">
+          <div class="contato-info">
+            <div class="info-item">
+              <span class="icon">📞</span>
+              <h4>Telefone</h4>
+              <p>(11) 3000-0000</p>
+            </div>
+            <div class="info-item">
+              <span class="icon">📧</span>
+              <h4>Email</h4>
+              <p>contato@autopecas.com.br</p>
+            </div>
+            <div class="info-item">
+              <span class="icon">📍</span>
+              <h4>Endereço</h4>
+              <p>Av. Principal, 1000 - São Paulo, SP</p>
+            </div>
+            <div class="info-item">
+              <span class="icon">⏰</span>
+              <h4>Horário</h4>
+              <p>Seg-Sex: 8h-18h<br>Sáb: 9h-13h</p>
+            </div>
+          </div>
+          <form class="contato-form">
+            <input type="text" placeholder="Seu Nome" required>
+            <input type="email" placeholder="Seu Email" required>
+            <textarea placeholder="Sua Mensagem" rows="5" required></textarea>
+            <button type="submit" class="submit-button">Enviar Mensagem</button>
+          </form>
+        </div>
+      </div>
+    </section>
   </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <p>&copy; 2026 AutoPeças Profissional. Todos os direitos reservados.</p>
+      <p>Desenvolvido por IronDev Software | Chatbot Powered by Google Gemini</p>
+    </div>
+  </footer>
+
   <script src="script.js"></script>
 </body>
 </html>
